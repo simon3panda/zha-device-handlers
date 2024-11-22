@@ -10,12 +10,11 @@ from zhaquirks.const import (
     BUTTON_2,
     BUTTON_3,
     BUTTON_4,
-    COMMAND,
-    COMMAND_PRESS,
-    COMMAND_DOUBLE,
-    COMMAND_HOLD,
     CLUSTER_ID,
     COMMAND,
+    COMMAND_DOUBLE,
+    COMMAND_HOLD,
+    COMMAND_PRESS,
     DEVICE_TYPE,
     DOUBLE_PRESS,
     ENDPOINTS,
@@ -70,21 +69,52 @@ class LinxuraButton(CustomDevice):
     }
 
     device_automation_triggers = {
-        
-        (SHORT_PRESS, BTN_1): {COMMAND: f"{BUTTON_1}_{COMMAND_PRESS}", CLUSTER_ID: IasZone.cluster_id, },
-        (DOUBLE_PRESS, BTN_1): {COMMAND: f"{BUTTON_1}_{COMMAND_DOUBLE}", CLUSTER_ID: IasZone.cluster_id, },
-        (LONG_PRESS, BTN_1): {COMMAND: f"{BUTTON_1}_{COMMAND_HOLD}", CLUSTER_ID: IasZone.cluster_id, },
-
-        (SHORT_PRESS, BTN_2): {COMMAND: f"{BUTTON_2}_{COMMAND_PRESS}", CLUSTER_ID: IasZone.cluster_id, },
-        (DOUBLE_PRESS, BTN_2): {COMMAND: f"{BUTTON_2}_{COMMAND_DOUBLE}", CLUSTER_ID: IasZone.cluster_id, },
-        (LONG_PRESS, BTN_2): {COMMAND: f"{BUTTON_2}_{COMMAND_HOLD}", CLUSTER_ID: IasZone.cluster_id, },
-
-        (SHORT_PRESS, BTN_3): {COMMAND: f"{BUTTON_3}_{COMMAND_PRESS}", CLUSTER_ID: IasZone.cluster_id, },
-        (DOUBLE_PRESS, BTN_3): {COMMAND: f"{BUTTON_3}_{COMMAND_DOUBLE}", CLUSTER_ID: IasZone.cluster_id, },
-        (LONG_PRESS, BTN_3): {COMMAND: f"{BUTTON_3}_{COMMAND_HOLD}", CLUSTER_ID: IasZone.cluster_id, },
-
-        (SHORT_PRESS, BTN_4): {COMMAND: f"{BUTTON_4}_{COMMAND_PRESS}", CLUSTER_ID: IasZone.cluster_id, },
-        (DOUBLE_PRESS, BTN_4): {COMMAND: f"{BUTTON_4}_{COMMAND_DOUBLE}", CLUSTER_ID: IasZone.cluster_id, },
-        (LONG_PRESS, BTN_4): {COMMAND: f"{BUTTON_4}_{COMMAND_HOLD}", CLUSTER_ID: IasZone.cluster_id, },
+        (SHORT_PRESS, BTN_1): {
+            COMMAND: f"{BUTTON_1}_{COMMAND_PRESS}",
+            CLUSTER_ID: IasZone.cluster_id,
+        },
+        (DOUBLE_PRESS, BTN_1): {
+            COMMAND: f"{BUTTON_1}_{COMMAND_DOUBLE}",
+            CLUSTER_ID: IasZone.cluster_id,
+        },
+        (LONG_PRESS, BTN_1): {
+            COMMAND: f"{BUTTON_1}_{COMMAND_HOLD}",
+            CLUSTER_ID: IasZone.cluster_id,
+        },
+        (SHORT_PRESS, BTN_2): {
+            COMMAND: f"{BUTTON_2}_{COMMAND_PRESS}",
+            CLUSTER_ID: IasZone.cluster_id,
+        },
+        (DOUBLE_PRESS, BTN_2): {
+            COMMAND: f"{BUTTON_2}_{COMMAND_DOUBLE}",
+            CLUSTER_ID: IasZone.cluster_id,
+        },
+        (LONG_PRESS, BTN_2): {
+            COMMAND: f"{BUTTON_2}_{COMMAND_HOLD}",
+            CLUSTER_ID: IasZone.cluster_id,
+        },
+        (SHORT_PRESS, BTN_3): {
+            COMMAND: f"{BUTTON_3}_{COMMAND_PRESS}",
+            CLUSTER_ID: IasZone.cluster_id,
+        },
+        (DOUBLE_PRESS, BTN_3): {
+            COMMAND: f"{BUTTON_3}_{COMMAND_DOUBLE}",
+            CLUSTER_ID: IasZone.cluster_id,
+        },
+        (LONG_PRESS, BTN_3): {
+            COMMAND: f"{BUTTON_3}_{COMMAND_HOLD}",
+            CLUSTER_ID: IasZone.cluster_id,
+        },
+        (SHORT_PRESS, BTN_4): {
+            COMMAND: f"{BUTTON_4}_{COMMAND_PRESS}",
+            CLUSTER_ID: IasZone.cluster_id,
+        },
+        (DOUBLE_PRESS, BTN_4): {
+            COMMAND: f"{BUTTON_4}_{COMMAND_DOUBLE}",
+            CLUSTER_ID: IasZone.cluster_id,
+        },
+        (LONG_PRESS, BTN_4): {
+            COMMAND: f"{BUTTON_4}_{COMMAND_HOLD}",
+            CLUSTER_ID: IasZone.cluster_id,
+        },
     }
-
