@@ -17,6 +17,7 @@ from zhaquirks.const import (
 )
 
 LINXURA = "Linxura"
+STATUS_REPORT = 2
 
 
 PRESS_TYPES = {
@@ -36,7 +37,7 @@ class LinxuraIASCluster(CustomCluster, zigpy.zcl.clusters.security.IasZone):
             value
         )
         super()._update_attribute(attrid, value)
-        if attrid == 2:
+        if attrid == STATUS_REPORT:
             if value > 0 and value < 24:
                 if value > 0 and value < 6:
                     button = BUTTON_1
