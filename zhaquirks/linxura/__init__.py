@@ -1,53 +1,59 @@
 """Linxura button device."""
 
-from typing import Any, Optional, Union
-
 from zigpy.quirks import CustomCluster
-import zigpy.types as t
-from zigpy.types import Addressing
-from zigpy.zcl import foundation
 import zigpy.zcl.clusters.security
 
-from zhaquirks.const import ARGS, COMMAND_ID, PRESS_TYPE, ZHA_SEND_EVENT
+from zhaquirks.const import COMMAND_ID, PRESS_TYPE, ZHA_SEND_EVENT
 
-DOUBLE = 2
-HOLD = 3
+from zhaquirks.const import (
+    BUTTON,
+    BUTTON_1,
+    BUTTON_2,
+    BUTTON_3,
+    BUTTON_4,
+    COMMAND_PRESS,
+    COMMAND_DOUBLE,
+    COMMAND_HOLD,
+)
+
 LINXURA = "Linxura"
-SINGLE = 1
-ACT_ERROR = 4
-STATUS_PARAM = 0
-CLICK_TYPES = {SINGLE: "single", DOUBLE: "double", HOLD: "hold"}
+
+
+PRESS_TYPES = {
+    1: COMMAND_PRESS,
+    2: COMMAND_DOUBLE,
+    3: COMMAND_HOLD,
+}
 
 
 class LinxuraIASCluster(CustomCluster, zigpy.zcl.clusters.security.IasZone):
     """Occupancy cluster."""
 
-    server_commands = {
-        0x00: foundation.ZCLCommandDef(
-            "button_event",
-            {"press_type": t.uint8_t},
-        ),
-    }
-
-    def handle_cluster_general_request(
-        self,
-        hdr: zigpy.zcl.foundation.ZCLHeader,
-        args: list[Any],
-        *,
-        dst_addressing: Optional[
-            Union[Addressing.Group, Addressing.IEEE, Addressing.NWK]
-        ] = None,
-    ):
-        """Handle a cluster command received on this cluster."""
-        if hdr.command_id == 0:
-            state = args[STATUS_PARAM]
-            if state >= ACT_ERROR:
-                return
-            else:
+    def _update_attribute(self, attrid, value):
+        self.info(
+            "Linxura update attribute - attrid: %d, value:%d",
+            attrid,
+            value
+        )
+        super()._update_attribute(attrid, value)
+        if attrid == 2:
+            if value > 0 and value < 24:
+                if value > 0 and value < 6:
+                    button = BUTTON_1
+                    press_type = PRESS_TYPES[value//2 + 1]
+                if value > 6 and value < 12:
+                    button = BUTTON_2
+                    press_type = PRESS_TYPES[value//2 - 3 + 1]
+                if value > 12 and value < 18:
+                    button = BUTTON_3
+                    press_type = PRESS_TYPES[value//2 - 6 + 1]
+                if value > 18 and value < 24:
+                    button = BUTTON_4
+                    press_type = PRESS_TYPES[value//2 - 9 + 1]
+                action = f"{button}_{press_type}"
                 event_args = {
-                    PRESS_TYPE: CLICK_TYPES[state],
-                    COMMAND_ID: hdr.command_id,
-                    ARGS: args,
+                    BUTTON: button,
+                    PRESS_TYPE: press_type,
+                    COMMAND_ID: 10, # to maintain backwards compatibility
                 }
-                action = f"button_{CLICK_TYPES[state]}"
                 self.listener_event(ZHA_SEND_EVENT, action, event_args)
