@@ -1,3 +1,5 @@
+"""Tests for Linxura quirks."""
+
 import pytest
 from unittest.mock import MagicMock
 from zhaquirks.linxura import LinxuraIASCluster, STATUS_REPORT, BUTTON_1, BUTTON_2, BUTTON_3, BUTTON_4
