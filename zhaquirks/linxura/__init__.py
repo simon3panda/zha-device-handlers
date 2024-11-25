@@ -36,13 +36,13 @@ class LinxuraIASCluster(CustomCluster, IasZone):
                 if 0 < value < 6:
                     button = BUTTON_1
                     press_type = PRESS_TYPES[value // 2 + 1]
-                if 6 < value < 12:
+                elif 6 < value < 12:
                     button = BUTTON_2
                     press_type = PRESS_TYPES[value // 2 - 3 + 1]
-                if 12 < value < 18:
+                elif 12 < value < 18:
                     button = BUTTON_3
                     press_type = PRESS_TYPES[value // 2 - 6 + 1]
-                if 18 < value < 24:
+                elif 18 < value < 24:
                     button = BUTTON_4
                     press_type = PRESS_TYPES[value // 2 - 9 + 1]
                 action = f"{button}_{press_type}"
