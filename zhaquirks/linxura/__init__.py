@@ -10,11 +10,11 @@ from zhaquirks.const import (
     BUTTON_2,
     BUTTON_3,
     BUTTON_4,
-    SHORT_PRESS,
+    COMMAND_ID,
     DOUBLE_PRESS,
     LONG_PRESS,
-    COMMAND_ID,
     PRESS_TYPE,
+    SHORT_PRESS,
     ZHA_SEND_EVENT,
 )
 

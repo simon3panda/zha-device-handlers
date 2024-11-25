@@ -25,7 +25,6 @@ from zhaquirks.const import (
 from zhaquirks.linxura import LINXURA, LinxuraIASCluster
 
 
-
 class LinxuraButton(CustomDevice):
     """Linxura button device."""
 
