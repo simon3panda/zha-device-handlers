@@ -34,7 +34,7 @@ class LinxuraIASCluster(CustomCluster, zigpy.zcl.clusters.security.IasZone):
     def _update_attribute(self, attrid, value):
         self.info("Linxura update attribute - attrid: %d, value:%d", attrid, value)
         super()._update_attribute(attrid, value)
-        if attrid == STATUS_REPORT:
+        if attrid == self.AttributeDefs.zone_status.id:
             if value > 0 and value < 24:
                 if value > 0 and value < 6:
                     button = BUTTON_1
