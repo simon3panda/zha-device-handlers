@@ -19,8 +19,6 @@ from zhaquirks.const import (
 )
 
 LINXURA = "Linxura"
-STATUS_REPORT = 2
-
 
 PRESS_TYPES = {
     1: SHORT_PRESS,
@@ -52,6 +50,6 @@ class LinxuraIASCluster(CustomCluster, IasZone):
                 event_args = {
                     BUTTON: button,
                     PRESS_TYPE: press_type,
-                    COMMAND_ID: 10,  # to maintain backwards compatibility
+                    COMMAND_ID: 10,
                 }
                 self.listener_event(ZHA_SEND_EVENT, action, event_args)
