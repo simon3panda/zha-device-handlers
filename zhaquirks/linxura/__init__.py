@@ -2,6 +2,7 @@
 
 from zigpy.quirks import CustomCluster
 import zigpy.zcl.clusters.security
+from zigpy.zcl.clusters.security import IasZone
 
 from zhaquirks.const import (
     BUTTON,
@@ -9,10 +10,10 @@ from zhaquirks.const import (
     BUTTON_2,
     BUTTON_3,
     BUTTON_4,
-    COMMAND_DOUBLE,
-    COMMAND_HOLD,
+    SHORT_PRESS,
+    DOUBLE_PRESS,
+    LONG_PRESS,
     COMMAND_ID,
-    COMMAND_PRESS,
     PRESS_TYPE,
     ZHA_SEND_EVENT,
 )
@@ -28,11 +29,10 @@ PRESS_TYPES = {
 }
 
 
-class LinxuraIASCluster(CustomCluster, zigpy.zcl.clusters.security.IasZone):
-    """Occupancy cluster."""
+class LinxuraIASCluster(CustomCluster, IasZone):
+    """IAS cluster used for Linxura button."""
 
     def _update_attribute(self, attrid, value):
-        self.info("Linxura update attribute - attrid: %d, value:%d", attrid, value)
         super()._update_attribute(attrid, value)
         if attrid == self.AttributeDefs.zone_status.id:
             if value > 0 and value < 24:

@@ -12,9 +12,6 @@ from zhaquirks.const import (
     BUTTON_4,
     CLUSTER_ID,
     COMMAND,
-    COMMAND_DOUBLE,
-    COMMAND_HOLD,
-    COMMAND_PRESS,
     DEVICE_TYPE,
     DOUBLE_PRESS,
     ENDPOINTS,
@@ -27,10 +24,6 @@ from zhaquirks.const import (
 )
 from zhaquirks.linxura import LINXURA, LinxuraIASCluster
 
-BTN_1 = "Button 1"
-BTN_2 = "Button 2"
-BTN_3 = "Button 3"
-BTN_4 = "Button 4"
 
 
 class LinxuraButton(CustomDevice):
@@ -69,52 +62,10 @@ class LinxuraButton(CustomDevice):
     }
 
     device_automation_triggers = {
-        (SHORT_PRESS, BTN_1): {
-            COMMAND: f"{BUTTON_1}_{COMMAND_PRESS}",
+        (press_type, button): {
+            COMMAND: f"{button}_{press_type}",
             CLUSTER_ID: IasZone.cluster_id,
-        },
-        (DOUBLE_PRESS, BTN_1): {
-            COMMAND: f"{BUTTON_1}_{COMMAND_DOUBLE}",
-            CLUSTER_ID: IasZone.cluster_id,
-        },
-        (LONG_PRESS, BTN_1): {
-            COMMAND: f"{BUTTON_1}_{COMMAND_HOLD}",
-            CLUSTER_ID: IasZone.cluster_id,
-        },
-        (SHORT_PRESS, BTN_2): {
-            COMMAND: f"{BUTTON_2}_{COMMAND_PRESS}",
-            CLUSTER_ID: IasZone.cluster_id,
-        },
-        (DOUBLE_PRESS, BTN_2): {
-            COMMAND: f"{BUTTON_2}_{COMMAND_DOUBLE}",
-            CLUSTER_ID: IasZone.cluster_id,
-        },
-        (LONG_PRESS, BTN_2): {
-            COMMAND: f"{BUTTON_2}_{COMMAND_HOLD}",
-            CLUSTER_ID: IasZone.cluster_id,
-        },
-        (SHORT_PRESS, BTN_3): {
-            COMMAND: f"{BUTTON_3}_{COMMAND_PRESS}",
-            CLUSTER_ID: IasZone.cluster_id,
-        },
-        (DOUBLE_PRESS, BTN_3): {
-            COMMAND: f"{BUTTON_3}_{COMMAND_DOUBLE}",
-            CLUSTER_ID: IasZone.cluster_id,
-        },
-        (LONG_PRESS, BTN_3): {
-            COMMAND: f"{BUTTON_3}_{COMMAND_HOLD}",
-            CLUSTER_ID: IasZone.cluster_id,
-        },
-        (SHORT_PRESS, BTN_4): {
-            COMMAND: f"{BUTTON_4}_{COMMAND_PRESS}",
-            CLUSTER_ID: IasZone.cluster_id,
-        },
-        (DOUBLE_PRESS, BTN_4): {
-            COMMAND: f"{BUTTON_4}_{COMMAND_DOUBLE}",
-            CLUSTER_ID: IasZone.cluster_id,
-        },
-        (LONG_PRESS, BTN_4): {
-            COMMAND: f"{BUTTON_4}_{COMMAND_HOLD}",
-            CLUSTER_ID: IasZone.cluster_id,
-        },
+        }
+        for press_type in (SHORT_PRESS, DOUBLE_PRESS, LONG_PRESS)
+        for button in (BUTTON_1, BUTTON_2, BUTTON_3, BUTTON_4)
     }
