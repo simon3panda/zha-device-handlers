@@ -44,6 +44,10 @@ class LinxuraIASCluster(CustomCluster, IasZone):
             elif 18 < value < 24:
                 button = BUTTON_4
                 press_type = PRESS_TYPES[value // 2 - 9 + 1]
+            else:
+                # discard invalid values
+                return
+
             action = f"{button}_{press_type}"
             event_args = {
                 BUTTON: button,
