@@ -31,24 +31,23 @@ class LinxuraIASCluster(CustomCluster, IasZone):
 
     def _update_attribute(self, attrid, value):
         super()._update_attribute(attrid, value)
-        if attrid == self.AttributeDefs.zone_status.id:
-            if 0 < value < 24:
-                if 0 < value < 6:
-                    button = BUTTON_1
-                    press_type = PRESS_TYPES[value // 2 + 1]
-                elif 6 < value < 12:
-                    button = BUTTON_2
-                    press_type = PRESS_TYPES[value // 2 - 3 + 1]
-                elif 12 < value < 18:
-                    button = BUTTON_3
-                    press_type = PRESS_TYPES[value // 2 - 6 + 1]
-                elif 18 < value < 24:
-                    button = BUTTON_4
-                    press_type = PRESS_TYPES[value // 2 - 9 + 1]
-                action = f"{button}_{press_type}"
-                event_args = {
-                    BUTTON: button,
-                    PRESS_TYPE: press_type,
-                    COMMAND_ID: 10,
-                }
-                self.listener_event(ZHA_SEND_EVENT, action, event_args)
+        if attrid == self.AttributeDefs.zone_status.id and 0 < value < 24:
+            if 0 < value < 6:
+                button = BUTTON_1
+                press_type = PRESS_TYPES[value // 2 + 1]
+            elif 6 < value < 12:
+                button = BUTTON_2
+                press_type = PRESS_TYPES[value // 2 - 3 + 1]
+            elif 12 < value < 18:
+                button = BUTTON_3
+                press_type = PRESS_TYPES[value // 2 - 6 + 1]
+            elif 18 < value < 24:
+                button = BUTTON_4
+                press_type = PRESS_TYPES[value // 2 - 9 + 1]
+            action = f"{button}_{press_type}"
+            event_args = {
+                BUTTON: button,
+                PRESS_TYPE: press_type,
+                COMMAND_ID: 10,
+            }
+            self.listener_event(ZHA_SEND_EVENT, action, event_args)
