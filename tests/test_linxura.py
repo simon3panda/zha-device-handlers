@@ -2,7 +2,6 @@
 
 import pytest
 from zigpy.zcl.clusters.security import IasZone
-from zigpy.zcl.foundation import ZCLHeader
 
 from tests.common import ClusterListener
 import zhaquirks
@@ -129,9 +128,6 @@ async def test_Linxura_button(zigpy_device_from_quirk, quirk):
     assert len(ias_zone_listener.attribute_updates) == 12
     assert ias_zone_listener.attribute_updates[11][0] == ias_zone_status_attr_id
     assert ias_zone_listener.attribute_updates[11][1] == 23
-
-
-
 
 
 @pytest.mark.parametrize("quirk", (zhaquirks.linxura.button.LinxuraButton,))
