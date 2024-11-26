@@ -112,6 +112,5 @@ async def test_button_triggers(zigpy_device_from_quirk, message, button, press_t
         {
             "button": button,
             "press_type": press_type,
-            "command_id": 10,
         },
     )
