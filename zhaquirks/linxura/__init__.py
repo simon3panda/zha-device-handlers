@@ -44,7 +44,7 @@ class LinxuraIASCluster(CustomCluster, IasZone):
                 button = BUTTON_4
                 press_type = PRESS_TYPES[value // 2 - 9 + 1]
             else:
-                # discard invalid values
+                # discard invalid values: 0, 6, 12, 18
                 return
 
             action = f"{button}_{press_type}"
