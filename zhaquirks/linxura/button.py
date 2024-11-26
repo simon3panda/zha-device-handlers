@@ -1,11 +1,12 @@
 """Linxura button device."""
 
 from zigpy.profiles import zha
-from zigpy.quirks import CustomDevice
+from zigpy.quirks import CustomCluster, CustomDevice
 from zigpy.zcl.clusters.general import Basic
 from zigpy.zcl.clusters.security import IasZone
 
 from zhaquirks.const import (
+    BUTTON,
     BUTTON_1,
     BUTTON_2,
     BUTTON_3,
@@ -19,10 +20,48 @@ from zhaquirks.const import (
     LONG_PRESS,
     MODELS_INFO,
     OUTPUT_CLUSTERS,
+    PRESS_TYPE,
     PROFILE_ID,
     SHORT_PRESS,
+    ZHA_SEND_EVENT,
 )
-from zhaquirks.linxura import LINXURA, LinxuraIASCluster
+from zhaquirks.linxura import LINXURA
+
+PRESS_TYPES = {
+    1: SHORT_PRESS,
+    2: DOUBLE_PRESS,
+    3: LONG_PRESS,
+}
+
+
+class LinxuraIASCluster(CustomCluster, IasZone):
+    """IAS cluster used for Linxura button."""
+
+    def _update_attribute(self, attrid, value):
+        super()._update_attribute(attrid, value)
+        if attrid == self.AttributeDefs.zone_status.id and 0 < value < 24:
+            if 0 < value < 6:
+                button = BUTTON_1
+                press_type = PRESS_TYPES[value // 2 + 1]
+            elif 6 < value < 12:
+                button = BUTTON_2
+                press_type = PRESS_TYPES[value // 2 - 3 + 1]
+            elif 12 < value < 18:
+                button = BUTTON_3
+                press_type = PRESS_TYPES[value // 2 - 6 + 1]
+            elif 18 < value < 24:
+                button = BUTTON_4
+                press_type = PRESS_TYPES[value // 2 - 9 + 1]
+            else:
+                # discard invalid values: 0, 6, 12, 18
+                return
+
+            action = f"{button}_{press_type}"
+            event_args = {
+                BUTTON: button,
+                PRESS_TYPE: press_type,
+            }
+            self.listener_event(ZHA_SEND_EVENT, action, event_args)
 
 
 class LinxuraButton(CustomDevice):
