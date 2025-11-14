@@ -2,9 +2,8 @@
 
 from zigpy.profiles import zha
 from zigpy.quirks import CustomCluster, CustomDevice
-from zigpy.zcl.clusters.general import Basic
+from zigpy.zcl.clusters.general import Basic, PowerConfiguration
 from zigpy.zcl.clusters.security import IasZone
-from zigpy.zcl.clusters.general import PowerConfiguration
 
 from zhaquirks.const import (
     BUTTON,
@@ -176,7 +175,20 @@ class LinxuraButton_Aura(CustomDevice):
             CLUSTER_ID: IasZone.cluster_id,
         }
         for press_type in (SHORT_PRESS, DOUBLE_PRESS, LONG_PRESS)
-        for button in (BUTTON_1, BUTTON_2, BUTTON_3, BUTTON_4, BUTTON_5, BUTTON_6, BUTTON_7, BUTTON_8, BUTTON_9, BUTTON_10, BUTTON_11, BUTTON_12)
+        for button in (
+            BUTTON_1,
+            BUTTON_2,
+            BUTTON_3,
+            BUTTON_4,
+            BUTTON_5,
+            BUTTON_6,
+            BUTTON_7,
+            BUTTON_8,
+            BUTTON_9,
+            BUTTON_10,
+            BUTTON_11,
+            BUTTON_12,
+        )
     }
 
 
