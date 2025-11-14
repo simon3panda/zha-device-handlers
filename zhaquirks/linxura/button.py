@@ -27,6 +27,7 @@ from zhaquirks.const import (
     SHORT_PRESS,
     ZHA_SEND_EVENT,
 )
+
 # from zhaquirks.linxura import LINXURA
 LINXURA = "Linxura"
 BUTTON_7 = "button_7"
@@ -131,6 +132,7 @@ class LinxuraButton(CustomDevice):
         }
     }
 
+
 class LinxuraButton_Aura(CustomDevice):
     """Linxura button device."""
 
@@ -190,5 +192,3 @@ class LinxuraButton_Aura(CustomDevice):
             BUTTON_12,
         )
     }
-
-
