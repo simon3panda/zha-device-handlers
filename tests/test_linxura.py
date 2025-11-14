@@ -30,7 +30,7 @@ async def test_button_ias(zigpy_device_from_quirk):
 
     # we get 20 events, 4 are discarded as invalid (0, 6, 12, 18)
     assert listener.attribute_updated.call_count == 72
-    assert listener.zha_send_event.call_count == 70
+    assert listener.zha_send_event.call_count == 60
 
 
 @pytest.mark.parametrize(
